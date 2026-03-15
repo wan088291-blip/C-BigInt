@@ -163,6 +163,9 @@ private:
 
     void render() const {
         std::vector<std::string> display = grid_;
+        const int aliveEnemies = std::count_if(enemies_.begin(), enemies_.end(), [](const Tank& enemy) {
+            return enemy.hp > 0;
+        });
 
         for (const auto& enemy : enemies_) {
             if (enemy.hp > 0) {
@@ -181,7 +184,7 @@ private:
         }
 
         std::cout << "\n=== 第 " << level_ << " 关 ===\n";
-        std::cout << "玩家血量: " << player_.hp << "   敌方数量: " << enemies_.size() << "\n";
+        std::cout << "玩家血量: " << player_.hp << "   敌方数量: " << aliveEnemies << "\n";
         std::cout << "图例: #墙体 .空地 P玩家 E敌人 *我方子弹 o敌方子弹\n";
         for (const auto& row : display) {
             std::cout << row << '\n';
@@ -371,7 +374,6 @@ private:
         bullets_.erase(std::remove_if(bullets_.begin(), bullets_.end(), [](const Bullet& b) { return !b.alive; }), bullets_.end());
     }
 
-private:
     int level_{1};
     std::vector<std::string> grid_;
     Tank player_{};
