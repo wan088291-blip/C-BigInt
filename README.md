@@ -1,2 +1,24 @@
-my first code
-use char and string to create a BigInt
+# C-BigInt
+
+这个仓库当前实现了一个基于 C++ 控制台的「坦克大战」示例游戏，满足以下规则：
+
+1. 共 3 关，且按敌方坦克数量递增（难度递增）。
+2. 三关地图通过文档文件读取（`maps/level1.txt`、`maps/level2.txt`、`maps/level3.txt`）。
+3. 我方坦克使用 `W/A/S/D` 移动，按空格发射子弹（直线飞行，最多反射 3 次）。
+4. 难度由每关敌方坦克数量决定。
+5. 机制：我方坦克 3 滴血，每次被敌方子弹命中掉 1 滴；敌方坦克 1 滴血。
+
+## 构建与运行
+
+```bash
+cmake -S . -B build
+cmake --build build
+./build/tank_game
+```
+
+## 地图格式说明
+
+- `#`：墙体
+- `.`：空地
+- `P`：我方坦克出生点（每关仅一个）
+- `E`：敌方坦克（数量决定关卡难度）
